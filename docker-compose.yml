@@ -5,11 +5,25 @@ services:
     depends_on:
       - mongo
     env_file: soundoftext-api.env
+    expose:
+      - "5757"
     image: ncpierson/soundoftext-api:latest
-    ports:
-      - "5757:5757"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=soundoftext-api"
+      - "traefik.frontend.rule=Host:api.soundoftext.com"
+      - "traefik.port=5757"
     restart: always
   mongo:
     container_name: soundoftext-db
     image: mongo
     restart: always
+  proxy:
+    container_name: soundoftext-proxy
+    image: traefik
+    ports:
+      - 80:80
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/traefik/traefik.toml:/traefik.toml
