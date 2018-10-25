@@ -6,4 +6,4 @@ popd
 
 eval $(docker-machine env soundoftext)
 
-./scripts/up.sh
+./scripts/down.sh

@@ -1,4 +1,4 @@
 .gitsecret/keys/random_seed
-.env
-.env.dev
 digitalocean.env
+soundoftext-api.env
+machine/soundoftext.zip
