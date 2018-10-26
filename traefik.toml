@@ -1,7 +1,7 @@
 debug = false
 
-logLevel = "ERROR"
-defaultEntryPoints = ["http"]
+logLevel = "INFO"
+defaultEntryPoints = ["https", "http"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
@@ -13,3 +13,20 @@ exposedByDefault = false
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[acme]
+acmeLogging = true
+email = "me@nick.exposed"
+entryPoint = "https"
+onHostRule = true
+storage = "acme.json"
+  [acme.httpChallenge]
+  entryPoint = "http"
+  [[acme.domains]]
+  main = "soundoftext.com"
+  sans = ["api.soundoftext.com"]
