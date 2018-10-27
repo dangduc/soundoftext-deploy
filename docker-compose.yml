@@ -1,13 +1,18 @@
 version: "3"
 services:
-  default:
+  web:
+    container_name: soundoftext-web
+    image: ncpierson/soundoftext-web:latest
+    labels:
+      - "traefik.backend=soundoftext-web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:soundoftext.com"
+      - "traefik.port=80"
+  api:
     container_name: soundoftext-api
     depends_on:
-      - mongo
-      - proxy
+      - database
     env_file: soundoftext-api.env
-    expose:
-      - "5757"
     image: ncpierson/soundoftext-api:latest
     labels:
       - "traefik.backend=soundoftext-api"
@@ -15,7 +20,7 @@ services:
       - "traefik.frontend.rule=Host:api.soundoftext.com"
       - "traefik.port=5757"
     restart: always
-  mongo:
+  database:
     container_name: soundoftext-db
     image: mongo
     restart: always
