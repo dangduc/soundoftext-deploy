@@ -17,4 +17,6 @@ docker-machine ssh $MACHINE_NAME "chmod 600 /opt/traefik/acme.json"
 
 eval $(docker-machine env $MACHINE_NAME)
 
+docker-compose pull
+
 ./scripts/up.sh
