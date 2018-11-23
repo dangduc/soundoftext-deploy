@@ -1,0 +1,13 @@
+dist: xenial
+sudo: required
+language: node_js
+node_js: lts/*
+if: branch = master
+before_install:
+  - openssl aes-256-cbc -K $encrypted_5b51ceeb7415_key -iv $encrypted_5b51ceeb7415_iv
+    -in deploy.gpg.enc -out deploy.gpg -d
+  - ./scripts/travis/decrypt.sh
+install:
+  - ./scripts/travis/install-docker-machine.sh
+  - yarn global add machine-share
+script: ./scripts/deploy.sh

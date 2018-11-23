@@ -3,3 +3,4 @@ digitalocean.env
 soundoftext-api.env
 machine/soundoftext.zip
 acme.json
+deploy.gpg
