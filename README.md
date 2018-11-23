@@ -17,7 +17,7 @@ You will also need to be added as a member of git secret.
 In most linux distros:
 
 ```
-sudo apt-get install gpg
+sudo apt-get install gnupg
 ```
 
 ### Export private gpg key
